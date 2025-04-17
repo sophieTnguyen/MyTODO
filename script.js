@@ -1,15 +1,27 @@
-const taskForm = document.getElementById('taskNameForm');
-const submitButton = document.querySelector('submit');
+window.addEventListener("DOMContentLoaded", function(){
+    const taskList = document.getElementById('task-list');
+    const taskForm = document.querySelector('input');
+    const submitButton = document.querySelector('form');
+    
+    submitButton.addEventListener("submit", function(event) {
+        event.preventDefault();
+        let task = createTask(taskForm.value);
+        task.Load();
+        taskForm.value = '';
+    })
 
-/*
-submitButton.addEventListener('submit', function(event) {
-    event.preventDefault();
-    console.log("SUBMITTED")
-})
-*/
+    function createTask(text) 
+    {
+        return {
+            text,
+            Load: function() {
+                const myTask = document.createElement('li');
+                taskList.appendChild(myTask);
+                myTask.className = "list-group-item";
+                myTask.innerText = text;
+            }
+    
+        }
+    }   
+});
 
-function submitForm(event) {
-    event.preventDefault(); // Prevent default form submission
-    // Your custom code here to handle the submission
-    console.log('Form submitted!');
-}
