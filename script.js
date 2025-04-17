@@ -2,6 +2,13 @@ window.addEventListener("DOMContentLoaded", function(){
     const taskList = document.getElementById('task-list');
     const taskForm = document.getElementById('taskNameForm');
     const submitButton = document.querySelector('form');
+
+    taskList.addEventListener("change", function(event) {
+        // let target = event.target;
+        console.log(event, event.target)
+
+        event.target.closest(".list-group-item  ").remove();
+    });
     
     submitButton.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -25,7 +32,6 @@ window.addEventListener("DOMContentLoaded", function(){
             const checkbox = document.createElement('input');
             checkbox.className = 'form-check-input';
             checkbox.type = 'checkbox';
-            // ID
 
             const label = document.createElement('label');
             label.className = 'form-check-label';
@@ -37,11 +43,6 @@ window.addEventListener("DOMContentLoaded", function(){
             div.appendChild(label);
             li.appendChild(div);
             taskList.appendChild(li);
-
-            checkbox.addEventListener("change", function() 
-            {
-                li.remove();
-            });
         };
     
     };
