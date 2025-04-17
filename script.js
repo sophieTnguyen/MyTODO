@@ -2,20 +2,30 @@ window.addEventListener("DOMContentLoaded", function(){
     const taskList = document.getElementById('task-list');
     const taskForm = document.getElementById('taskNameForm');
     const submitButton = document.querySelector('form');
+    const main = this.document.getElementById("main");
 
     taskList.addEventListener("change", function(event) {
-        // let target = event.target;
-        console.log(event, event.target)
-
         event.target.closest(".list-group-item  ").remove();
     });
     
     submitButton.addEventListener("submit", function(event) {
         event.preventDefault();
         console.log(taskForm.value, taskForm)
-        let task = new Task(taskForm.value);
-        task.Load();
-        taskForm.value = '';
+        if (taskForm.value !== '')
+        {
+            const task = new Task(taskForm.value);
+            task.Load();
+            taskForm.value = '';
+        }
+        else 
+        {
+            const alert = document.createElement('div');
+            alert.className = "alert alert-warning alert-dismissible fade show";
+            alert.setAttribute('role',"alert")
+            alert.innerText = "Enter a valid task";
+            main.append(alert);
+        }
+
     })
 
     function Task(text) 
